@@ -1,4 +1,4 @@
-- name: "Install Docker Engine and Deploy wayshub-frontend"
+- name: "Install Docker"
   hosts: all
   become: yes
 
@@ -55,13 +55,3 @@
           name: "{{ new_user }}"
           groups: docker
           append: yes
-
-      - name: "Deploy Docker image from DockerHub"
-        docker_container:
-          name: wayshub-frontend
-          image: fadil05me/wayshub-frontend:latest
-          state: started
-          ports:
-              - "3001:3000"
-          restart_policy: always
-        when: inventory_hostname == 'server2'
